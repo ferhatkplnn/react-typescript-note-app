@@ -5,13 +5,14 @@ import Tag from "../components/Tag";
 
 const NoteDetail = () => {
   const { id } = useParams();
-  const { notesWithTags } = useNote();
+  const { notesWithTags, onDeleteNote } = useNote();
   const navigate = useNavigate();
 
   const note = notesWithTags.find((_note) => _note.id === id);
 
   if (!note) {
-    navigate("/", { replace: true });
+    navigate("/");
+    return <div>Not Found</div>;
   }
 
   return (
@@ -34,7 +35,10 @@ const NoteDetail = () => {
           >
             Edit
           </Link>
-          <button className="border py-2 px-4 rounded border-primary text-primary hover:brightness-150 duration-300">
+          <button
+            onClick={() => onDeleteNote(note.id)}
+            className="border py-2 px-4 rounded border-primary text-primary hover:brightness-150 duration-300"
+          >
             Delete
           </button>
           <Link
