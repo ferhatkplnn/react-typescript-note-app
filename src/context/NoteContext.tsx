@@ -16,6 +16,7 @@ type NoteContextType = {
   onCreateNote: (data: NoteData) => void;
   onUpdateNote: (data: Note) => void;
   addTag: (tag: Tag) => void;
+  onDeleteNote: (id: string) => void;
 };
 
 const initialNoteContext: NoteContextType = {
@@ -27,6 +28,7 @@ const initialNoteContext: NoteContextType = {
   onCreateNote: () => {},
   onUpdateNote: () => {},
   addTag: () => {},
+  onDeleteNote: () => {},
 };
 
 export const NoteContext = createContext(initialNoteContext);
@@ -69,6 +71,10 @@ export const NoteProvider = ({ children }: NoteProviderProps) => {
     });
   };
 
+  const onDeleteNote = (id: string) => {
+    setNotes(notes.filter((n) => n.id !== id));
+  };
+
   const addTag = (tag: Tag) => {
     setTags((prev) => [...prev, tag]);
   };
@@ -82,6 +88,7 @@ export const NoteProvider = ({ children }: NoteProviderProps) => {
     onCreateNote,
     addTag,
     onUpdateNote,
+    onDeleteNote,
   };
 
   return (
