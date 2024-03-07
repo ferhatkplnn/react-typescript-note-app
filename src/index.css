@@ -43,4 +43,24 @@
   span {
     font-size: 16px;
   }
+
+  pre {
+    @apply bg-purple-900 p-2 text-xs;
+  }
+  code {
+    @apply bg-purple-900 p-2 text-xs;
+  }
+
+  pre > code {
+    @apply bg-transparent p-0;
+  }
+
+  ul,
+  ol {
+    @apply my-4;
+  }
+
+  li {
+    @apply pl-4 before:content-["-"] before:pr-4;
+  }
 }
