@@ -29,7 +29,7 @@ const NoteDetail = () => {
         </div>
         <div className="space-x-2 flex">
           <Link
-            to={`/edit/${note?.id}`}
+            to={`./edit`}
             className="border py-2 px-4 rounded bg-primary border-primary hover:brightness-125 duration-300"
           >
             Edit
