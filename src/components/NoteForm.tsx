@@ -53,6 +53,7 @@ const NoteForm = ({
             placeholder="Note Title..."
             ref={titleRef}
             defaultValue={note?.title || ""}
+            required
           />
         </div>
 
@@ -91,6 +92,7 @@ const NoteForm = ({
           placeholder="Note Body..."
           ref={markdownRef}
           defaultValue={note?.markdown || ""}
+          required
         />
       </div>
 
