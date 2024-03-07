@@ -14,6 +14,7 @@ type NoteContextType = {
   setTags: React.Dispatch<React.SetStateAction<Tag[]>>;
   notesWithTags: NoteWithTags[];
   onCreateNote: (data: NoteData) => void;
+  addTag: (tag: Tag) => void;
 };
 
 const initialNoteContext: NoteContextType = {
@@ -23,6 +24,7 @@ const initialNoteContext: NoteContextType = {
   setTags: () => {},
   notesWithTags: [],
   onCreateNote: () => {},
+  addTag: () => {},
 };
 
 export const NoteContext = createContext(initialNoteContext);
@@ -49,6 +51,10 @@ export const NoteProvider = ({ children }: NoteProviderProps) => {
     });
   };
 
+  const addTag = (tag: Tag) => {
+    setTags((prev) => [...prev, tag]);
+  };
+
   const noteContextValues: NoteContextType = {
     notes,
     setNotes,
@@ -56,6 +62,7 @@ export const NoteProvider = ({ children }: NoteProviderProps) => {
     setTags,
     notesWithTags,
     onCreateNote,
+    addTag,
   };
 
   return (
