@@ -40,7 +40,7 @@ const NoteList = () => {
         </div>
       </div>
 
-      <form className="flex gap-6 mt-6">
+      <form className="flex flex-col sm:flex-row gap-6 mt-6">
         <div className="flex flex-col space-y-2 flex-1">
           <label htmlFor="title">Title</label>
           <input
@@ -75,7 +75,7 @@ const NoteList = () => {
         </div>
       </form>
 
-      <div className="grid grid-cols-2 gap-6 mt-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mt-8">
         {filteredNotes.map((note: NoteWithTags) => (
           <NoteListCard note={note} key={note.id} />
         ))}
