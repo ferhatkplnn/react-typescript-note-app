@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useMemo } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { NoteData, NoteWithTags, RawNote, Tag } from "../types/types";
+import { Note, NoteData, NoteWithTags, RawNote, Tag } from "../types/types";
 import { v4 as uuidV4 } from "uuid";
 
 type NoteProviderProps = {
@@ -14,6 +14,7 @@ type NoteContextType = {
   setTags: React.Dispatch<React.SetStateAction<Tag[]>>;
   notesWithTags: NoteWithTags[];
   onCreateNote: (data: NoteData) => void;
+  onUpdateNote: (data: Note) => void;
   addTag: (tag: Tag) => void;
 };
 
@@ -24,6 +25,7 @@ const initialNoteContext: NoteContextType = {
   setTags: () => {},
   notesWithTags: [],
   onCreateNote: () => {},
+  onUpdateNote: () => {},
   addTag: () => {},
 };
 
@@ -51,6 +53,22 @@ export const NoteProvider = ({ children }: NoteProviderProps) => {
     });
   };
 
+  const onUpdateNote = ({ tags, id, ...data }: Note) => {
+    setNotes((prevNotes) => {
+      return prevNotes.map((note) => {
+        if (note.id === id) {
+          return {
+            ...note,
+            markdown: data.markdown,
+            title: data.title,
+            tagIds: tags.map((tag) => tag.id),
+          };
+        }
+        return note;
+      });
+    });
+  };
+
   const addTag = (tag: Tag) => {
     setTags((prev) => [...prev, tag]);
   };
@@ -63,6 +81,7 @@ export const NoteProvider = ({ children }: NoteProviderProps) => {
     notesWithTags,
     onCreateNote,
     addTag,
+    onUpdateNote,
   };
 
   return (
