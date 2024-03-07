@@ -5,21 +5,37 @@ import { Tag } from "../types/types";
 import { useNote } from "../context/useNote";
 import { v4 as uuidV4 } from "uuid";
 
-const NoteForm = () => {
+const NoteForm = ({
+  isEdit = false,
+  id,
+}: {
+  isEdit?: boolean;
+  id?: string;
+}) => {
   const titleRef = useRef<HTMLInputElement>(null);
   const markdownRef = useRef<HTMLTextAreaElement>(null);
-  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
-  const { onCreateNote, addTag, tags } = useNote();
+  const { onCreateNote, notesWithTags, onUpdateNote, addTag, tags } = useNote();
+  const note = notesWithTags.find((_note) => _note.id === id);
+  const [selectedTags, setSelectedTags] = useState<Tag[]>(note?.tags || []);
   const navigate = useNavigate();
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    onCreateNote({
-      title: titleRef.current!.value,
-      markdown: markdownRef.current!.value,
-      tags: selectedTags,
-    });
+    if (isEdit && id) {
+      onUpdateNote({
+        title: titleRef.current!.value,
+        markdown: markdownRef.current!.value,
+        tags: selectedTags,
+        id,
+      });
+    } else {
+      onCreateNote({
+        title: titleRef.current!.value,
+        markdown: markdownRef.current!.value,
+        tags: selectedTags,
+      });
+    }
 
     navigate("..");
   }
@@ -36,6 +52,7 @@ const NoteForm = () => {
             name="title"
             placeholder="Note Title..."
             ref={titleRef}
+            defaultValue={note?.title || ""}
           />
         </div>
 
@@ -51,9 +68,7 @@ const NoteForm = () => {
               label: tag.label,
               value: tag.id,
             }))}
-            // defaultValue={[trys[0]]}
             isMulti
-            // name="colors"
             onChange={(_tags) => {
               setSelectedTags(
                 _tags.map((tag) => ({ label: tag.label, id: tag.value }))
@@ -75,6 +90,7 @@ const NoteForm = () => {
           className="outline-none text-black p-2 flex-1 rounded focus:ring-2 ring-inset"
           placeholder="Note Body..."
           ref={markdownRef}
+          defaultValue={note?.markdown || ""}
         />
       </div>
 
