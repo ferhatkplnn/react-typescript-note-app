@@ -1,4 +1,4 @@
-import Select from "react-select";
+import CreatableSelect from "react-select/creatable";
 
 const trys = [
   { value: "soman", label: "osman" },
@@ -23,7 +23,7 @@ const NoteForm = () => {
 
         <div className="flex flex-col flex-1 space-y-2">
           <label htmlFor="tags">Tags</label>
-          <Select
+          <CreatableSelect
             defaultValue={[trys[0]]}
             isMulti
             name="colors"
