@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 
 const App = () => {
   return (
-    <div className="p-10">
+    <div className="p-10 container h-screen">
       <Outlet />
     </div>
   );
