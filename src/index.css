@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply bg-bgNavy text-gray-100;
+    @apply bg-bgNavy text-gray-100 font-kalam;
   }
 
   h1 {
