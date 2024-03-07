@@ -1,13 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import { NewNote } from "../pages/NewNote";
+import NoteList from "../pages/NoteList";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      { path: "/", element: <div>Home</div> },
+      { path: "/", element: <NoteList /> },
       {
         path: "/new",
         element: <NewNote />,
