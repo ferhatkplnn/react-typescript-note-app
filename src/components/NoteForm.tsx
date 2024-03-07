@@ -1,14 +1,16 @@
 import { FormEvent, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CreatableSelect from "react-select/creatable";
 import { Tag } from "../types/types";
 import { useNote } from "../context/useNote";
+import { v4 as uuidV4 } from "uuid";
 
 const NoteForm = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   const markdownRef = useRef<HTMLTextAreaElement>(null);
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
-  const { onCreateNote } = useNote();
+  const { onCreateNote, addTag, tags } = useNote();
+  const navigate = useNavigate();
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -16,8 +18,10 @@ const NoteForm = () => {
     onCreateNote({
       title: titleRef.current!.value,
       markdown: markdownRef.current!.value,
-      tags: [],
+      tags: selectedTags,
     });
+
+    navigate("..");
   }
 
   return (
@@ -38,19 +42,24 @@ const NoteForm = () => {
         <div className="flex flex-col flex-1 space-y-2">
           <label htmlFor="tags">Tags</label>
           <CreatableSelect
+            onCreateOption={(label) => {
+              const newTag = { id: uuidV4(), label };
+              addTag(newTag);
+              setSelectedTags((prev) => [...prev, newTag]);
+            }}
             value={selectedTags.map((tag) => ({
               label: tag.label,
               value: tag.id,
             }))}
             // defaultValue={[trys[0]]}
             isMulti
-            name="colors"
-            onChange={(tags) => {
+            // name="colors"
+            onChange={(_tags) => {
               setSelectedTags(
-                tags.map((tag) => ({ label: tag.label, id: tag.value }))
+                _tags.map((tag) => ({ label: tag.label, id: tag.value }))
               );
             }}
-            // options={trys}
+            options={tags.map((tag) => ({ label: tag.label, value: tag.id }))}
             className="basic-multi-select text-black"
             classNamePrefix="select"
             placeholder="Note tags..."
