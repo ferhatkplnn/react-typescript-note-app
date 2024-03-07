@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
+import { NewNote } from "../pages/NewNote";
 
 export const router = createBrowserRouter([
   {
@@ -9,7 +10,7 @@ export const router = createBrowserRouter([
       { path: "/", element: <div>Home</div> },
       {
         path: "/new",
-        element: <div>New Page</div>,
+        element: <NewNote />,
       },
       { path: "/detail/:id", element: <div>Post Details</div> },
       { path: "/detail/:id/edit", element: <div>Post edit</div> },
