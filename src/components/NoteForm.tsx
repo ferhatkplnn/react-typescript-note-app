@@ -1,14 +1,29 @@
+import { FormEvent, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import CreatableSelect from "react-select/creatable";
+import { NoteData, Tag } from "../types/types";
 
-const trys = [
-  { value: "soman", label: "osman" },
-  { value: "cabbar", label: "cabbar" },
-  { value: "cumhur", label: "cumhur" },
-];
+type NoteFormProps = {
+  onSubmit: (data: NoteData) => void;
+};
 
-const NoteForm = () => {
+const NoteForm = ({ onSubmit }: NoteFormProps) => {
+  const titleRef = useRef<HTMLInputElement>(null);
+  const markdownRef = useRef<HTMLTextAreaElement>(null);
+  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+
+    onSubmit({
+      title: titleRef.current!.value,
+      markdown: markdownRef.current!.value,
+      tags: [],
+    });
+  }
+
   return (
-    <form className="flex flex-col flex-1 ">
+    <form onSubmit={handleSubmit} className="flex flex-col flex-1 ">
       <div className="flex  gap-6">
         <div className="flex flex-col flex-1 space-y-2">
           <label htmlFor="title">Title:</label>
@@ -18,16 +33,26 @@ const NoteForm = () => {
             id="title"
             name="title"
             placeholder="Note Title..."
+            ref={titleRef}
           />
         </div>
 
         <div className="flex flex-col flex-1 space-y-2">
           <label htmlFor="tags">Tags</label>
           <CreatableSelect
-            defaultValue={[trys[0]]}
+            value={selectedTags.map((tag) => ({
+              label: tag.label,
+              value: tag.id,
+            }))}
+            // defaultValue={[trys[0]]}
             isMulti
             name="colors"
-            options={trys}
+            onChange={(tags) => {
+              setSelectedTags(
+                tags.map((tag) => ({ label: tag.label, id: tag.value }))
+              );
+            }}
+            // options={trys}
             className="basic-multi-select text-black"
             classNamePrefix="select"
             placeholder="Note tags..."
@@ -42,6 +67,7 @@ const NoteForm = () => {
           name="body"
           className="outline-none text-black p-2 flex-1 rounded focus:ring-2 ring-inset"
           placeholder="Note Body..."
+          ref={markdownRef}
         />
       </div>
 
@@ -49,9 +75,12 @@ const NoteForm = () => {
         <button className="border py-2 px-4 rounded bg-primary border-primary hover:brightness-125 duration-300">
           Save
         </button>
-        <button className="border py-2 px-4 rounded border-primary text-primary hover:brightness-150 duration-300">
+        <Link
+          to=".."
+          className="border py-2 px-4 rounded border-primary text-primary hover:brightness-150 duration-300"
+        >
           Cancel
-        </button>
+        </Link>
       </div>
     </form>
   );
