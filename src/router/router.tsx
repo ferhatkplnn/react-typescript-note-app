@@ -3,6 +3,7 @@ import App from "../App";
 import { NewNote } from "../pages/NewNote";
 import NoteList from "../pages/NoteList";
 import NoteDetail from "../pages/NoteDetail";
+import EditNote from "../pages/EditNote";
 
 export const router = createBrowserRouter([
   {
@@ -15,7 +16,7 @@ export const router = createBrowserRouter([
         element: <NewNote />,
       },
       { path: "/detail/:id", element: <NoteDetail /> },
-      { path: "/detail/:id/edit", element: <div>Post edit</div> },
+      { path: "/detail/:id/edit", element: <EditNote /> },
 
       { path: "*", element: <h1>Not Found</h1> },
     ],
