@@ -13,6 +13,9 @@ export default {
         kalam: ["Kalam", "cursive"],
       },
     },
+    container: {
+      center: true,
+    },
   },
   plugins: [],
 };
