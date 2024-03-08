@@ -1,30 +1,31 @@
-# React + TypeScript + Vite
+# React typescript note app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a note application developed using React. The application allows users to add, edit, filter, and delete notes. Additionally, it supports Markdown for note content.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Note Creation**: Users can add new notes, each with a title and a body.
 
-## Expanding the ESLint configuration
+- **Note Editing**: Existing notes can be edited, allowing changes to the title, content, or tags.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Note Deletion**: Unwanted notes can be deleted.
 
-- Configure the top-level `parserOptions` property like this:
+- **Markdown Support**: Note content supports Markdown format, enabling text formatting features.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- **Tagging**: Each note can be tagged, and notes can be filtered based on tags.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## Usage
+
+- **Adding Notes**: Create a new note by clicking the "Add Note" button on the main page.
+- **Editing Notes**: Enter the edit mode by clicking on the notes.
+- **Deleting Notes**: Access the delete option by clicking on the notes.
+- **Filtering**: Filter notes based on title, tag, or both.
+
+## Screenshots
+
+![image](https://github.com/ferhatkplnn/react-typescript-note-app/assets/29931637/806de659-39d1-44f1-9d25-c12032c2b784)
+
+![image](https://github.com/ferhatkplnn/react-typescript-note-app/assets/29931637/80eda23e-f4d2-4d16-acbf-68371b451e3e)
+
+![image](https://github.com/ferhatkplnn/react-typescript-note-app/assets/29931637/395ef3ab-24e5-487b-912c-ed91b15ede03)
