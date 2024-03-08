@@ -6,7 +6,7 @@
 
 @layer base {
   body {
-    @apply bg-bgNavy text-gray-100 font-kalam;
+    @apply bg-gradient-to-b from-bgNavy/90 to-bgNavy/100 text-gray-100 font-kalam;
   }
 
   h1 {
